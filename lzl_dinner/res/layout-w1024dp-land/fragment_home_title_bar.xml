@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="0dp"
+    android:background="#3b3b3b"
+    android:paddingBottom="40dp" >
+
+    <ImageView
+        android:id="@+id/home_title_bar_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="40dp"
+        android:src="@drawable/logo" />
+
+    <DigitalClock
+        android:id="@+id/home_title_bar_now"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/home_title_bar_date"
+        android:layout_marginRight="72dp"
+        android:layout_marginTop="35dp"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/home_title_bar_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/home_title_bar_now"
+        android:layout_marginRight="29dp"
+        android:layout_marginTop="20dp"
+        android:text="12/18 周三 七月初四"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/home_title_bar_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/home_title_bar_date"
+        android:layout_alignBottom="@+id/home_title_bar_date"
+        android:layout_alignLeft="@+id/home_title_bar_now"
+        android:layout_marginTop="20dp"
+        android:text="晴 5C"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/home_title_bar_local"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/home_title_bar_weather"
+        android:layout_marginRight="148dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/home_title_bar_weather_icon"
+        android:drawableLeft="@drawable/local"
+        android:text="  广州"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/home_title_bar_weather_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/home_title_bar_local"
+        android:layout_alignParentBottom="false"
+        android:layout_marginBottom="34dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="40dp"
+        android:layout_toLeftOf="@+id/home_title_bar_now"
+        android:src="@drawable/weather_sun" />
+
+</RelativeLayout>
