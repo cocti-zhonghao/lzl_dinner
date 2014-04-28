@@ -27,11 +27,11 @@ target
 # Local configuration file (sdk path, etc)
 local.properties
  
-# Eclipse project files
-.classpath
-.project
-.metadata
-.settings
+## Eclipse project files
+#.classpath
+#.project
+#.metadata
+#.settings
  
 # IntelliJ files
 .idea
