@@ -37,6 +37,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             >
         </activity>
+        <service android:name=".srv.DataUpdateService" android:enabled="true"></service>
     </application>
 
 </manifest>
