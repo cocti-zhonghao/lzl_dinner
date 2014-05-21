@@ -8,6 +8,7 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="14" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MyApplication"
@@ -35,6 +36,7 @@
             android:label="@string/title_activity_order" 
             android:screenOrientation="landscape"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:theme="@style/NoActionBarTheme"
             >
         </activity>
         <service android:name=".srv.DataUpdateService" android:enabled="true"></service>

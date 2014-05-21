@@ -3,7 +3,7 @@
     android:id="@+id/menu_content_item_root"
     android:layout_width="257dp"
     android:layout_height="372dp"
-    android:layout_gravity="center"
+    android:layout_gravity="fill"
     android:background="@drawable/menu_item_rectangle" >
 
     <ImageView
@@ -12,8 +12,7 @@
         android:layout_height="286dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="1dp"
-        android:layout_marginRight="1dp"
+        android:layout_margin="1dp"
         android:adjustViewBounds="false"
         android:src="@drawable/menu_item_placeholder_img" />
 
@@ -29,6 +28,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="15dp"
         android:text="双色鱼头"
+        android:textColor="@android:color/white"
         android:textSize="24sp" />
 
     <TextView

@@ -30,6 +30,7 @@ public class LzlDBOpenHelper extends SQLiteOpenHelper {
 	{
 		MenuCategoryDao.getInstance().onCreate(db);
 		MenuDetailDao.getInstance().onCreate(db);
+		ResourceStatusDao.getInstance().onCreate(db);
 	}
 
 	// Called when there is a database version mismatch meaning that
