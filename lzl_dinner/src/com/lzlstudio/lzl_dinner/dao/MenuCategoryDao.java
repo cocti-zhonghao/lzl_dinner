@@ -1,8 +1,6 @@
 package com.lzlstudio.lzl_dinner.dao;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import com.lzlstudio.lzl_dinner.datadefine.MenuData;
 
@@ -21,18 +19,20 @@ public class MenuCategoryDao extends LzlDBTable {
 		return SingletonHolder.INSTANCE;
 	}
 	//
-	public final String TABLE_NAME = "lzl_menu_category"; 	//菜品类别表
-	public final String FIELD_ID = "id"; 					//INTEGER PRIMARY KEY ;
-	public final String FIELD_NAME = "name";				//VARCHAR(128)
-	public final String FIELD_NAME_EN = "name_en";			//VARCHAR(128)
-	public final String FIELD_DESCRIPTION = "description";	//VARCHAR(512)
-	public final String FIELD_IMG_URL = "img_url";			//VARCHAR(128)
+	public final String TABLE_NAME = "lzl_menu_category"; 		//菜品类别表
+	public final String FIELD_ID = "id"; 						//INTEGER PRIMARY KEY ;
+	public final String FIELD_NAME = "name";					//VARCHAR(128)
+	public final String FIELD_NAME_EN = "name_en";				//VARCHAR(128)
+	public final String FIELD_DESCRIPTION = "description";		//VARCHAR(512)
+	public final String FIELD_IMG_URL = "img_url";				//VARCHAR(128)
+	public final String FIELD_SELECT_IMG_URL = "select_img_url";//VARCHAR(128)
 	private final String _CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "("
 										 + FIELD_ID 			+ " INTEGER PRIMARY KEY ,"
 										 + FIELD_NAME 			+ " VARCHAR(128),"
 										 + FIELD_NAME_EN		+ " VARCHAR(128),"
 										 + FIELD_DESCRIPTION 	+ " VARCHAR(512),"
-										 + FIELD_IMG_URL		+ " VARCHAR(128)"
+										 + FIELD_IMG_URL		+ " VARCHAR(128),"
+										 + FIELD_SELECT_IMG_URL + " VARCHAR(128)"
 										 + ")";
 	@Override
 	public void onCreate(SQLiteDatabase sqliteDatabase) {
@@ -54,7 +54,7 @@ public class MenuCategoryDao extends LzlDBTable {
 	{
 		int iRet = 0;
 		SQLiteDatabase sqliteDatabase = getDatabase();
-		SQLiteStatement sqlListStatment = sqliteDatabase.compileStatement("INSERT INTO " + TABLE_NAME + " VALUES(?,?,?,?,?)");
+		SQLiteStatement sqlListStatment = sqliteDatabase.compileStatement("INSERT INTO " + TABLE_NAME + " VALUES(?,?,?,?,?,?)");
 		//
 		sqliteDatabase.beginTransaction();
 		//
@@ -66,6 +66,7 @@ public class MenuCategoryDao extends LzlDBTable {
 			sqlListStatment.bindString(3, item.title_en);
 			sqlListStatment.bindString(4, item.des);
 			sqlListStatment.bindString(5, item.img);
+			sqlListStatment.bindString(6, item.selected_img);
 			//
 			long rowId = sqlListStatment.executeInsert();
 			if (rowId < 0 ) {
@@ -93,7 +94,7 @@ public class MenuCategoryDao extends LzlDBTable {
 			item.title_en = cursor.getString(2); if(item.title_en == null) item.title_en = "" ;
 			item.des = cursor.getString(3); if(item.des == null) item.des = "";
 			item.img = cursor.getString(4);
-			
+			item.selected_img = cursor.getString(5);
 			list.add(item);
 		}
 		//

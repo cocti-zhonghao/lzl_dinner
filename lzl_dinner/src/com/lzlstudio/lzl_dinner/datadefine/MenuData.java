@@ -9,6 +9,7 @@ public class MenuData {
 		public String title = "";
 		public String title_en = "";
 		public String img = "";
+		public String selected_img = "";
 		public String key = "";
 		public String des = "";
 	}

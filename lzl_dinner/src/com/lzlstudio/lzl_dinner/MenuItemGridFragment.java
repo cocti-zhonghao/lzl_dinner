@@ -2,14 +2,13 @@ package com.lzlstudio.lzl_dinner;
 
 import java.util.ArrayList;
 
-import com.lzlstudio.lzl_dinner.OrderActivity.LoadResult;
-import com.lzlstudio.lzl_dinner.OrderActivity.LoadTask;
-import com.lzlstudio.lzl_dinner.dao.MenuCategoryDao;
 import com.lzlstudio.lzl_dinner.dao.MenuDetailDao;
 import com.lzlstudio.lzl_dinner.dao.ResourceStatusDao;
 import com.lzlstudio.lzl_dinner.dao.LzlDBTable.NoRecordException;
 import com.lzlstudio.lzl_dinner.dao.ResourceStatusDao.MenuStatus;
 import com.lzlstudio.lzl_dinner.datadefine.MenuData;
+import com.lzlstudio.lzl_dinner.util.MyThumbnailTool;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.app.Activity;
@@ -22,7 +21,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -31,12 +29,41 @@ import android.widget.TextView;
 public class MenuItemGridFragment extends Fragment {
 	GridView gv;
 	MenuItemListAdapter menuItemListAdapter;
-	ArrayList<MenuData.MenuItem> menuItemList;//@zh
+	//ArrayList<MenuData.MenuItem> menuItemList;//@zh
 	LoadTask loadTask = new LoadTask();
+	int m_category_id;	
+	
+	static public MenuItemGridFragment newInstance(int category_id)
+	{
+		MenuItemGridFragment fragment = new MenuItemGridFragment();
+		fragment.setCategoryId(category_id);
+		//
+		Bundle bundle = new Bundle();
+		bundle.putInt("category_id", category_id);
+		fragment.setArguments(bundle);
+		//
+		return fragment;
+	}
+	
+	public void setCategoryId(int category_id)
+	{
+		m_category_id = category_id;
+	}
+	
+	public int getCategoryId()
+	{
+		return m_category_id;
+	}
+	
 	@Override
 	public void  onCreate (Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
+		Bundle bundle = getArguments();
+		if(null != bundle)
+		{
+			m_category_id = bundle.getInt("category_id");
+		}
 		loadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 	@Override
@@ -75,6 +102,7 @@ public class MenuItemGridFragment extends Fragment {
 		Context mContext;
 		ArrayList<MenuData.MenuItem> menuItemList;
 		private LayoutInflater mInflater;
+		DisplayImageOptions options = new DisplayImageOptions.Builder().postProcessor(new MyThumbnailTool(257, 286)).build();//@zh TODO db->pixel
 		
 		public MenuItemListAdapter(Context context, ArrayList<MenuData.MenuItem> list)
 		{
@@ -142,7 +170,7 @@ public class MenuItemGridFragment extends Fragment {
 			}
 			//
 			ImageView iv = (ImageView) holder.rootView.findViewById(R.id.menu_content_item_detail_img);
-			ImageLoader.getInstance().displayImage(item.img, iv);
+			ImageLoader.getInstance().displayImage(item.img, iv, options);
 			TextView name = (TextView) holder.rootView.findViewById(R.id.menu_content_item_name);
 			name.setText(item.title);
 			TextView oPrice = (TextView) holder.rootView.findViewById(R.id.menu_content_item_show_price);
@@ -190,7 +218,7 @@ public class MenuItemGridFragment extends Fragment {
 						result.retCode = ms.status;
 						if(result.retCode == ResourceStatusDao.STATE_OK)
 						{
-							result.data = MenuDetailDao.getInstance().getMenuItemList(1);//@zh just for test
+							result.data = MenuDetailDao.getInstance().getMenuItemList(m_category_id);
 						}
 						break;
 					}

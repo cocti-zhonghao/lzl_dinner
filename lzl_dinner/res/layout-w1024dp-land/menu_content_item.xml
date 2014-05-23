@@ -13,8 +13,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_margin="1dp"
-        android:adjustViewBounds="false"
-        android:src="@drawable/menu_item_placeholder_img" />
+        android:adjustViewBounds="false" />
 
     <TextView
         android:id="@+id/menu_content_item_name"

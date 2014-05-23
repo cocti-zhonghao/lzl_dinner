@@ -55,7 +55,8 @@ public class MenuLoaderHelper {
 		File toDir = context.getFilesDir();
 		try {
 			// Initiate ZipFile object with the path/name of the zip file.
-			ZipFile zipFile = new ZipFile(new File(dir, "menu.zip"));		
+			ZipFile zipFile = new ZipFile(new File(dir, "menu.zip"));
+			zipFile.setFileNameCharset("GBK");//@zh TOOD 一般是windows系统
 			//Extracts all files to the path specified
 			zipFile.extractAll(toDir.getPath());
 			
@@ -149,6 +150,10 @@ public class MenuLoaderHelper {
 			item.title = xpp.getAttributeValue(0);
 			item.img = imgBaseDir+xpp.getAttributeValue(1);
 			item.id = category_id;
+			//
+			item.selected_img = xpp.getAttributeValue(null, "select_img");
+			if(item.selected_img == null) item.selected_img = item.img;
+			else item.selected_img = imgBaseDir+item.selected_img;
 			menuCategoryList.add(item);
 		}
 		else if(tag.equals(XML_TAG_item))
