@@ -1,6 +1,5 @@
 package com.lzlstudio.lzl_dinner;
 
-import android.R.integer;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Intent;
@@ -9,9 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;

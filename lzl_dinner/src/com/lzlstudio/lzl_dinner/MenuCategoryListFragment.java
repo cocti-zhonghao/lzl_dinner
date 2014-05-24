@@ -98,7 +98,7 @@ public class MenuCategoryListFragment extends ListFragment
 		TextView title;
 	}
 
-	static class MenuCategoryListAdapter extends BaseAdapter
+	class MenuCategoryListAdapter extends BaseAdapter
 	{
 		Context mContext;
 		ArrayList<MenuData.MenuCategoryItem> categoryList;
@@ -146,7 +146,7 @@ public class MenuCategoryListFragment extends ListFragment
 				LinearLayout ll = new LinearLayout(mContext);
 				ll.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, 50));
 				ll.setOrientation(LinearLayout.HORIZONTAL);
-				//ll.setBackgroundResource(R.drawable.menu_category_item_background);
+				//
 				//
 				ImageView iv = new ImageView(mContext); iv.setTag("show_img");
 				ll.addView(iv);
@@ -176,7 +176,16 @@ public class MenuCategoryListFragment extends ListFragment
 				holder = (ViewHolder) convertView.getTag();				
 			}
 			//
-			ImageLoader.getInstance().displayImage(item.img, holder.img);
+			if(mCurrentSelectItemView == null && mCurrentSelectItemPos == position)
+			{
+				ImageLoader.getInstance().displayImage(item.selected_img, holder.img);
+				mCurrentSelectItemView = holder.ll;
+				holder.ll.setBackgroundResource(R.drawable.menu_category_item_background);
+			}
+			else
+			{
+				ImageLoader.getInstance().displayImage(item.img, holder.img);
+			}			
 			holder.title.setText(item.title);
 			return holder.ll;
 		}
@@ -233,6 +242,16 @@ public class MenuCategoryListFragment extends ListFragment
 			{
 				foodCategoryListAdapter.updateData(result.data);
 				//
+//				View v  = getListView().getChildAt(0);
+//				if(null != v)
+//				{
+//					onListItemClick(getListView(), v, 0, foodCategoryListAdapter.getItemId(0));
+//				}
+//				else
+//				{
+//					categorySelectListener.onCategoryItemSelected(0, result.data.get(0).id);
+//				}
+				mCurrentSelectItemPos = 0;
 				categorySelectListener.onCategoryItemSelected(0, result.data.get(0).id);
 			}
 		}

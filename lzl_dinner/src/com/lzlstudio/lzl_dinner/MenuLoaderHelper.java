@@ -179,7 +179,14 @@ public class MenuLoaderHelper {
 		{
 			if(XML_TAG_FLAG_category == START_TAG_FLAG)
 			{
-				nextMenuItem.des = xpp.getText(); if(null == nextMenuItem.des) nextMenuItem.des = "";
+				try {
+					nextMenuItem.des = xpp.nextText();
+					if(null == nextMenuItem.des) nextMenuItem.des = "";
+				} catch (XmlPullParserException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} 
 			}			
 		}
 	}

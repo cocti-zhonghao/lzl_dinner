@@ -13,6 +13,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Paint;
@@ -21,12 +22,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MenuItemGridFragment extends Fragment {
+public class MenuItemGridFragment extends Fragment implements OnItemClickListener {
 	GridView gv;
 	MenuItemListAdapter menuItemListAdapter;
 	//ArrayList<MenuData.MenuItem> menuItemList;//@zh
@@ -80,7 +83,8 @@ public class MenuItemGridFragment extends Fragment {
 		gv.setHorizontalSpacing(10);
 		gv.setVerticalSpacing(10);
 		gv.setAdapter(menuItemListAdapter);		
-		
+		//
+		gv.setOnItemClickListener(this);
 		//
 		return v;
 	}
@@ -169,7 +173,7 @@ public class MenuItemGridFragment extends Fragment {
 				holder = (ViewHolder) convertView.getTag();				
 			}
 			//
-			ImageView iv = (ImageView) holder.rootView.findViewById(R.id.menu_content_item_detail_img);
+			ImageView iv = (ImageView) holder.rootView.findViewById(R.id.menu_content_item_img);
 			ImageLoader.getInstance().displayImage(item.img, iv, options);
 			TextView name = (TextView) holder.rootView.findViewById(R.id.menu_content_item_name);
 			name.setText(item.title);
@@ -251,5 +255,12 @@ public class MenuItemGridFragment extends Fragment {
 		protected void onCancelled()
 		{
 		}
+	}
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
+	{
+		MenuItemDetailFragment detail = MenuItemDetailFragment.newInstance((MenuData.MenuItem)menuItemListAdapter.getItem(position));
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+		detail.show(ft, null);
 	}
 }

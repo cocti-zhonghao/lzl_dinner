@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="915dp"
+    android:layout_height="match_parent"
+    android:minWidth="915dp" >
+
+    <TextView
+        android:id="@+id/menu_content_item_detail_title"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="川香水煮鱼"
+        android:textColor="#797979"
+        android:textSize="24sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/menu_content_item_detail_title"
+        android:background="#bdbdbd" />
+
+    <ImageView
+        android:id="@+id/menu_content_item_detail_img"
+        android:layout_width="wrap_content"
+        android:layout_height="424dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/menu_content_item_detail_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="31dp"
+        android:layout_marginRight="31dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/menu_content_item_detail_title2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/menu_content_item_detail_img"
+        android:layout_below="@+id/menu_content_item_detail_img"
+        android:layout_marginTop="20dp"
+        android:text="川香水煮鱼"
+        android:textColor="#161616"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/menu_content_item_detail_title2"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/menu_content_item_detail_title2"
+        android:text="￥"
+        android:textColor="#f02f04"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/menu_content_item_detail_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_marginLeft="0dp"
+        android:layout_toRightOf="@+id/textView1"
+        android:text="35.00元/例"
+        android:textColor="#f02f04"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/menu_content_item_detail_ori_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/menu_content_item_detail_price"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/menu_content_item_detail_price"
+        android:text="原价：65.00"
+        android:textColor="#aeaeae"
+        android:textSize="16sp"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/menu_content_item_detail_order_btn"
+        android:layout_width="140dp"
+        android:layout_height="48dp"
+        android:layout_alignBottom="@+id/menu_content_item_detail_ori_price"
+        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/menu_content_item_detail_img"
+        android:layout_marginRight="31dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/menu_item_detail_order_btn_background"
+        android:text="点菜"
+        android:textColor="@android:color/white"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/menu_content_item_detail_des"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/menu_content_item_detail_title2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/menu_content_item_detail_price"
+        android:layout_marginLeft="31dp"
+        android:layout_marginRight="31dp"
+        android:layout_marginTop="38dp"
+        android:scrollHorizontally="true"
+        android:text="菜品描述信息菜品描述信息菜品描述信息菜品描述信息菜品描述信息菜品描述信息菜品描述信息菜品描述信息菜品描述信息菜品描述信息菜品描述信息菜品描述信息"
+        android:textColor="#444444"
+        android:textSize="16sp" />
+
+</RelativeLayout>

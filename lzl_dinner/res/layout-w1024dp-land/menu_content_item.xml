@@ -7,7 +7,7 @@
     android:background="@drawable/menu_item_rectangle" >
 
     <ImageView
-        android:id="@+id/menu_content_item_detail_img"
+        android:id="@+id/menu_content_item_img"
         android:layout_width="match_parent"
         android:layout_height="286dp"
         android:layout_alignParentLeft="true"
@@ -19,7 +19,7 @@
         android:id="@+id/menu_content_item_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/menu_content_item_detail_img"
+        android:layout_alignBottom="@id/menu_content_item_img"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="1dp"
         android:layout_marginRight="1dp"
@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/menu_content_item_detail_img"
+        android:layout_below="@+id/menu_content_item_img"
         android:layout_marginBottom="1dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="12dp"
@@ -72,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/menu_content_item_detail_img"
+        android:layout_alignRight="@+id/menu_content_item_img"
         android:layout_alignTop="@+id/menu_content_item_sale_price_label"
         android:layout_marginBottom="15dp"
         android:layout_marginRight="15dp"

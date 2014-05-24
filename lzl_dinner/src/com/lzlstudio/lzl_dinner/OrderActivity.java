@@ -1,6 +1,7 @@
 package com.lzlstudio.lzl_dinner;
 
 import com.lzlstudio.lzl_dinner.MenuCategoryListFragment.CategorySelectListener;
+import com.lzlstudio.lzl_dinner.datadefine.MenuData;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
@@ -10,7 +11,7 @@ import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class OrderActivity extends Activity implements CategorySelectListener {
+public class OrderActivity extends Activity implements CategorySelectListener,MenuItemDetailFragment.OrderListener{
 	
 	SparseArray<MenuItemGridFragment> menuDetailFragmentList = new SparseArray<MenuItemGridFragment>();
 	int mCurrentSelectedCategoryPos = -1;
@@ -106,5 +107,10 @@ public class OrderActivity extends Activity implements CategorySelectListener {
 		}
 		//
 		return fragment;			
+	}
+
+	@Override
+	public void onOrder(MenuData.MenuItem item) 
+	{	
 	}	
 }

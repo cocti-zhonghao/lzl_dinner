@@ -1,5 +1,7 @@
 package com.lzlstudio.lzl_dinner.datadefine;
 
+import java.io.Serializable;
+
 public class MenuData {
 
 	//////
@@ -14,8 +16,10 @@ public class MenuData {
 		public String des = "";
 	}
 
-	public static class MenuItem
+	public static class MenuItem implements Serializable
 	{
+		private static final long serialVersionUID = -2462507148441193604L;
+		//
 		public int id;
 		public int category_id;
 		public String title;
