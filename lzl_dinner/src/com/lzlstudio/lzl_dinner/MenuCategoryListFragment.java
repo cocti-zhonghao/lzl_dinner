@@ -71,18 +71,28 @@ public class MenuCategoryListFragment extends ListFragment
 	{
 		if(mCurrentSelectItemPos != position)
 		{
+			ViewHolder holder;
 			ImageView iv;
+			TextView tv;
 			if(mCurrentSelectItemView != null && mCurrentSelectItemPos >= 0)
 			{
-				iv = (ImageView) mCurrentSelectItemView.findViewWithTag("show_img");
+				holder = (ViewHolder) mCurrentSelectItemView.getTag();
+				//iv = (ImageView) mCurrentSelectItemView.findViewWithTag("show_img");
+				iv = holder.img;
 				ImageLoader.getInstance().displayImage(((MenuData.MenuCategoryItem)l.getItemAtPosition(mCurrentSelectItemPos)).img, iv);
-				mCurrentSelectItemView.setBackgroundResource(0);			
+				//tv = (TextView) mCurrentSelectItemView.findViewWithTag("category_title");
+				tv = holder.title; tv.setTextColor(0xff666666);
+				mCurrentSelectItemView.setBackgroundResource(0);					
 			}
 			//
 			mCurrentSelectItemView = v;
 			mCurrentSelectItemPos = position;
-			iv = (ImageView) mCurrentSelectItemView.findViewWithTag("show_img");
+			holder = (ViewHolder) mCurrentSelectItemView.getTag();
+			//iv = (ImageView) mCurrentSelectItemView.findViewWithTag("show_img");
+			iv = holder.img;
 			ImageLoader.getInstance().displayImage(((MenuData.MenuCategoryItem)l.getItemAtPosition(mCurrentSelectItemPos)).selected_img, iv);
+			//tv = (TextView) mCurrentSelectItemView.findViewWithTag("category_title");
+			tv = holder.title; tv.setTextColor(0xffffffff);
 			mCurrentSelectItemView.setBackgroundResource(R.drawable.menu_category_item_background);
 		}
 
@@ -155,7 +165,7 @@ public class MenuCategoryListFragment extends ListFragment
 				lp.gravity = Gravity.CENTER_VERTICAL;
 				iv.setLayoutParams(lp);
 				//
-				TextView tv = new TextView(mContext);
+				TextView tv = new TextView(mContext); tv.setTag("category_title");
 				ll.addView(tv);
 				lp = (LinearLayout.LayoutParams) tv.getLayoutParams();
 				lp.leftMargin = 18;
@@ -181,6 +191,7 @@ public class MenuCategoryListFragment extends ListFragment
 				ImageLoader.getInstance().displayImage(item.selected_img, holder.img);
 				mCurrentSelectItemView = holder.ll;
 				holder.ll.setBackgroundResource(R.drawable.menu_category_item_background);
+				holder.title.setTextColor(0xffffffff);//白色
 			}
 			else
 			{

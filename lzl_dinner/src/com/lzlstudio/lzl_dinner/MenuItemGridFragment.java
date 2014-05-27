@@ -11,22 +11,34 @@ import com.lzlstudio.lzl_dinner.util.MyThumbnailTool;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import android.R.integer;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.SimpleCursorAdapter.ViewBinder;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnKeyListener;
+import android.view.View.OnTouchListener;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.Transformation;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MenuItemGridFragment extends Fragment implements OnItemClickListener {
@@ -35,6 +47,9 @@ public class MenuItemGridFragment extends Fragment implements OnItemClickListene
 	//ArrayList<MenuData.MenuItem> menuItemList;//@zh
 	LoadTask loadTask = new LoadTask();
 	int m_category_id;	
+	
+	//
+	boolean cartClicked = false;
 	
 	static public MenuItemGridFragment newInstance(int category_id)
 	{
@@ -77,7 +92,10 @@ public class MenuItemGridFragment extends Fragment implements OnItemClickListene
 		//
 		gv = (GridView) v.findViewById(R.id.common_grid_content);
 		gv.setNumColumns(3);
-		gv.setColumnWidth(257);
+		
+		Resources r = getResources(); 	
+		gv.setColumnWidth((int)r.getDimension(R.dimen.menu_item_width));
+
 		
 		gv.setPadding(16, 0, 0, 0);
 		gv.setHorizontalSpacing(10);
@@ -95,13 +113,22 @@ public class MenuItemGridFragment extends Fragment implements OnItemClickListene
 		super.onAttach(activity);
 		menuItemListAdapter = new MenuItemListAdapter(activity);
 	}
+	
 	//
 	static class ViewHolder
 	{
+		int dataPositon;
 		View rootView;
+		//
+		ImageView img;
+		TextView title;
+		TextView show_price;
+		TextView sale_price;
+		RelativeLayout cart;
+		TextView cart_num;
 	}
 
-	static class MenuItemListAdapter extends BaseAdapter
+	class MenuItemListAdapter extends BaseAdapter implements View.OnClickListener
 	{
 		Context mContext;
 		ArrayList<MenuData.MenuItem> menuItemList;
@@ -163,6 +190,17 @@ public class MenuItemGridFragment extends Fragment implements OnItemClickListene
 				//
 				holder = new ViewHolder();
 				holder.rootView = mInflater.inflate(R.layout.menu_content_item, null);
+				//((ViewGroup)holder.rootView).requestDisallowInterceptTouchEvent(true);//@zh TODO
+				//
+				holder.img = (ImageView) holder.rootView.findViewById(R.id.menu_content_item_img);
+				holder.title = (TextView) holder.rootView.findViewById(R.id.menu_content_item_name);
+				holder.show_price = (TextView) holder.rootView.findViewById(R.id.menu_content_item_show_price);
+				holder.sale_price = (TextView) holder.rootView.findViewById(R.id.menu_content_item_sale_price);
+				holder.cart = (RelativeLayout) holder.rootView.findViewById(R.id.menu_content_item_cart);
+				holder.cart_num = (TextView) holder.rootView.findViewById(R.id.menu_content_item_cart_num);	
+				//
+				holder.cart.setOnClickListener(this);
+				//
 				holder.rootView.setTag(holder);
 				//
 				Resources r = mContext.getResources(); 				
@@ -173,30 +211,47 @@ public class MenuItemGridFragment extends Fragment implements OnItemClickListene
 				holder = (ViewHolder) convertView.getTag();				
 			}
 			//
-			ImageView iv = (ImageView) holder.rootView.findViewById(R.id.menu_content_item_img);
-			ImageLoader.getInstance().displayImage(item.img, iv, options);
-			TextView name = (TextView) holder.rootView.findViewById(R.id.menu_content_item_name);
-			name.setText(item.title);
-			TextView oPrice = (TextView) holder.rootView.findViewById(R.id.menu_content_item_show_price);
+			holder.dataPositon = position;
+			ImageLoader.getInstance().displayImage(item.img, holder.img, options);
+			holder.title.setText(item.title);
 			if(item.original_price > 0)
 			{
-				oPrice.setText("原价：￥ "+item.original_price);
-				oPrice.setTextColor(0xffaeaeae);
-				int flag = oPrice.getPaint().getFlags();				
-				oPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG|flag);
+				holder.show_price.setVisibility(View.VISIBLE);
+				holder.show_price.setText("原价：￥ "+item.original_price);
+				holder.show_price.setTextColor(0xffaeaeae);
+				int flag = holder.show_price.getPaint().getFlags();				
+				holder.show_price.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG|flag);
 			}
 			else if(item.special_price > 0) 
 			{
-				oPrice.setText("特价：￥ "+item.special_price);
-				oPrice.setTextColor(0xff63c93f);
-				int flag = oPrice.getPaint().getFlags();
-				name.getPaint().setFlags((~Paint.STRIKE_THRU_TEXT_FLAG)&flag);				
+				holder.show_price.setVisibility(View.VISIBLE);
+				holder.show_price.setText("会员价：￥ "+item.special_price);
+				holder.show_price.setTextColor(0xff63c93f);
+				int flag = holder.show_price.getPaint().getFlags();
+				holder.show_price.getPaint().setFlags((~Paint.STRIKE_THRU_TEXT_FLAG)&flag);				
 			}
-			
+			else 
+			{
+				holder.show_price.setVisibility(View.INVISIBLE);
+			}
+			//
+			holder.sale_price.setText(item.price+"元/例");
 			//
 			return holder.rootView;
 		}
 		//
+
+
+
+		@Override
+		public void onClick(View v) {
+			if(v.getId() == R.id.menu_content_item_cart)
+			{
+				RelativeLayout parent = (RelativeLayout) v.getParent();
+				ViewHolder vh = (ViewHolder) parent.getTag();
+				onAddToCart(menuItemList.get(vh.dataPositon), v);
+			}
+		}
 	}
 	//
 	static class LoadResult
@@ -262,5 +317,35 @@ public class MenuItemGridFragment extends Fragment implements OnItemClickListene
 		MenuItemDetailFragment detail = MenuItemDetailFragment.newInstance((MenuData.MenuItem)menuItemListAdapter.getItem(position));
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		detail.show(ft, null);
+	}
+	
+	public void onAddToCart(MenuData.MenuItem item, View v)
+	{
+		TextView tv = (TextView) v.findViewById(R.id.menu_content_item_cart_num);
+		tv.setVisibility(View.VISIBLE);
+		tv.startAnimation(new CartAnimation());
+	}
+	
+	static class CartAnimation extends Animation
+	{
+		private int mWidth;
+		private int mHeight;
+		@Override
+		public void initialize(int width, int height, int parentWidth, int parentHeight)
+		{
+			mWidth = width;
+			mHeight = height;
+			
+			super.initialize(width, height, parentWidth, parentHeight);
+			setDuration(100);
+			setFillAfter(true);
+			setInterpolator(new LinearInterpolator());
+		}
+		@Override
+		protected void applyTransformation(float interpolatedTime, Transformation t)
+		{
+			final Matrix matrix = t.getMatrix();
+			matrix.setScale(interpolatedTime, interpolatedTime, mWidth/2, mHeight/2);
+		}
 	}
 }

@@ -46,7 +46,7 @@
         android:textSize="28sp" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/menu_content_item_cart_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/menu_content_item_detail_title2"
@@ -60,10 +60,10 @@
         android:id="@+id/menu_content_item_detail_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView1"
-        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignBaseline="@+id/menu_content_item_cart_num"
+        android:layout_alignBottom="@+id/menu_content_item_cart_num"
         android:layout_marginLeft="0dp"
-        android:layout_toRightOf="@+id/textView1"
+        android:layout_toRightOf="@+id/menu_content_item_cart_num"
         android:text="35.00元/例"
         android:textColor="#f02f04"
         android:textSize="22sp" />
