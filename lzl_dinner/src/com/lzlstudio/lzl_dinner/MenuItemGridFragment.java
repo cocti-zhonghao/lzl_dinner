@@ -31,6 +31,7 @@ import android.view.View.OnKeyListener;
 import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.view.animation.Transformation;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -324,6 +325,18 @@ public class MenuItemGridFragment extends Fragment implements OnItemClickListene
 		TextView tv = (TextView) v.findViewById(R.id.menu_content_item_cart_num);
 		tv.setVisibility(View.VISIBLE);
 		tv.startAnimation(new CartAnimation());
+		//
+//		ScaleAnimation scaleAnimation = new ScaleAnimation(0, 1, 0, 1, tv.getWidth()/2, tv.getHeight()/2);
+//		scaleAnimation.setDuration(1000);
+//		scaleAnimation.setFillAfter(true);
+//		scaleAnimation.setInterpolator(new LinearInterpolator());
+//		tv.startAnimation(scaleAnimation);
+		//
+		int [] fromXY = new int[2];
+		//v.getLocationInWindow(fromXY);
+		tv.getLocationInWindow(fromXY); fromXY[1] -= 20;//@zh TODO
+		//tv.getLocationOnScreen(fromXY);
+		((OrderActivity)getActivity()).startAddToCartAnimation(fromXY);
 	}
 	
 	static class CartAnimation extends Animation

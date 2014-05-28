@@ -5,7 +5,7 @@
     android:background="@drawable/action_bar_background" >
 
     <LinearLayout
-        android:id="@+id/linearLayout1"
+        android:id="@+id/my_action_bar_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -36,42 +36,45 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/linearLayout1"
+        android:layout_toRightOf="@+id/my_action_bar_back"
         android:text="点菜"
         android:textColor="#ff666666"
         android:textSize="18sp" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/my_action_bar_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/imageView3"
+        android:layout_alignTop="@+id/my_action_bar_search"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="25dp"
         android:src="@drawable/action_bar_more" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/my_action_bar_search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageView5"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="false"
-        android:layout_centerVertical="true"
+        android:layout_alignTop="@+id/my_action_bar_back"
         android:layout_marginRight="42dp"
-        android:layout_toLeftOf="@+id/imageView5"
-        android:src="@drawable/action_bar_cmd" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="42dp"
-        android:layout_toLeftOf="@+id/imageView4"
+        android:layout_toLeftOf="@+id/my_action_bar_menu"
         android:src="@drawable/action_bar_find" />
+
+    <RelativeLayout
+        android:id="@+id/my_action_bar_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/my_action_bar_more"
+        android:layout_marginRight="42dp"
+        android:layout_toLeftOf="@+id/my_action_bar_more" >
+
+        <ImageView
+            android:id="@+id/my_action_bar_menu_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="42dp"
+            android:src="@drawable/action_bar_cmd" />
+    </RelativeLayout>
 
 </RelativeLayout>
