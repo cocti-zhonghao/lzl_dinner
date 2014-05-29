@@ -8,4 +8,8 @@
     <dimen name="menu_item_height">380dp</dimen>
 	<!--  -->
 	<dimen name="menu_item_detail_window_width">915dp</dimen>
+	<!--  -->
+    <dimen name="ordered_menu_list_window_width">915dp</dimen>    
+    <dimen name="ordered_menu_list_window_height">380dp</dimen>
+	<dimen name="ordered_menu_list_window_x">60dp</dimen>
 </resources>

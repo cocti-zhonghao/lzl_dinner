@@ -1,9 +1,11 @@
 package com.lzlstudio.lzl_dinner;
 
+import java.util.ArrayList;
+
 import com.lzlstudio.lzl_dinner.MenuCategoryListFragment.CategorySelectListener;
 import com.lzlstudio.lzl_dinner.datadefine.MenuData;
+import com.lzlstudio.lzl_dinner.OrderedMenuListFragment;
 
-import android.R.integer;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -14,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.LinearInterpolator;
@@ -23,18 +24,20 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-public class OrderActivity extends Activity implements CategorySelectListener,MenuItemDetailFragment.OrderListener{
+public class OrderActivity extends Activity implements CategorySelectListener,MenuItemDetailFragment.OrderListener,View.OnClickListener{
 	
 	SparseArray<MenuItemGridFragment> menuDetailFragmentList = new SparseArray<MenuItemGridFragment>();
 	int mCurrentSelectedCategoryPos = -1;
 	int mCurrentSelectedCategoryId = -1;
 	RelativeLayout mOrderedMenuCountContianer;
 	ImageView mOrderMenuImg;
-	
+	ArrayList<MenuData.MenuItem> selectedMenuItemList = new ArrayList<MenuData.MenuItem>();
 	void initActionBar()
 	{
 		mOrderedMenuCountContianer = (RelativeLayout) findViewById(R.id.my_action_bar_menu);
 		mOrderMenuImg = (ImageView) findViewById(R.id.my_action_bar_menu_img);
+		//
+		mOrderedMenuCountContianer.setOnClickListener(this);
 	}
 	
 	int[] getAddToCartDestXY()
@@ -204,6 +207,22 @@ public class OrderActivity extends Activity implements CategorySelectListener,Me
 
 	@Override
 	public void onOrder(MenuData.MenuItem item) 
-	{	
+	{
+		for (MenuData.MenuItem menuItem : selectedMenuItemList) {
+			if(menuItem.id == item.id) return;
+		}
+		//
+		selectedMenuItemList.add(item);
+	}
+
+	@Override
+	public void onClick(View v) 
+	{
+		if(v.getId() == R.id.my_action_bar_menu)
+		{
+			OrderedMenuListFragment fragment = OrderedMenuListFragment.newInstance(selectedMenuItemList);
+			FragmentTransaction ft = getFragmentManager().beginTransaction();
+			fragment.show(ft, null);
+		}
 	}	
 }

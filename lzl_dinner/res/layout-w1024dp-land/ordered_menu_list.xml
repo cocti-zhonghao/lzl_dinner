@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/ordered_menu_list_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        android:text="已点菜品"
+        android:textSize="24sp" />
+	<View
+	android:layout_width="match_parent"
+	android:layout_height="1dp"
+	android:layout_below="@id/ordered_menu_list_item_title"
+	android:background="#bdbdbd" />
+
+	<TextView
+	    android:id="@+id/textView2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_below="@+id/ordered_menu_list_item_title"
+	    android:layout_marginLeft="36dp"
+	    android:layout_marginTop="36dp"
+	    android:text="已点菜品数量："
+	    android:textColor="#797979"
+	    android:textSize="18sp" />
+
+	<TextView
+	    android:id="@+id/ordered_menu_list_count"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/textView2"
+	    android:layout_alignBottom="@+id/textView2"
+	    android:layout_marginLeft="10dp"
+	    android:layout_toRightOf="@+id/textView2"
+	    android:text="2件"
+	    android:textColor="#fb5240"
+	    android:textSize="30sp" />
+
+	<TextView
+	    android:id="@+id/ordered_menu_list_remove"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/ordered_menu_list_count"
+	    android:layout_alignBottom="@+id/ordered_menu_list_count"
+	    android:layout_alignParentRight="true"
+	    android:layout_marginRight="65dp"
+	    android:text="删除"
+	    android:textColor="#d4d4d4"
+	    android:textSize="18sp" />
+
+	<TextView
+	    android:id="@+id/ordered_menu_list_select"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/ordered_menu_list_remove"
+	    android:layout_alignBottom="@+id/ordered_menu_list_remove"
+	    android:layout_marginRight="52dp"
+	    android:layout_toLeftOf="@+id/ordered_menu_list_remove"
+	    android:text="反选"
+	    android:textColor="#fb5240"
+	    android:textSize="18sp" />
+
+	<TextView
+	    android:id="@+id/textView4"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/textView2"
+	    android:layout_alignParentLeft="true"
+	    android:layout_below="@+id/ordered_menu_list_count"
+	    android:layout_marginLeft="36dp"
+	    android:layout_marginTop="43dp"
+	    android:text="总价："
+	    android:textColor="#797979"
+	    android:textSize="18sp" />
+
+	<TextView
+	    android:id="@+id/ordered_menu_list_total_price"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/textView4"
+	    android:layout_alignBottom="@+id/textView4"
+	    android:layout_marginLeft="10dp"
+	    android:layout_toRightOf="@+id/textView4"
+	    android:text="￥70.00元"
+	    android:textColor="#fb5240"
+	    android:textSize="30sp" />
+
+	<Button
+	    android:id="@+id/ordered_menu_list_order_btn"
+	    android:layout_width="160dp"
+	    android:layout_height="45dp"
+	    android:layout_alignBaseline="@+id/textView4"
+	    android:layout_alignBottom="@+id/textView4"
+	    android:layout_alignParentRight="true"
+	    android:layout_alignRight="@+id/ordered_menu_list_remove"
+	    android:layout_marginRight="35dp"
+	    android:background="@drawable/btn_background_round_corner_4dp"
+	    android:text="下单"
+	    android:textColor="@android:color/white"
+	    android:textSize="24sp" />
+
+	<ListView
+	    android:id="@+id/ordered_menu_list_order_list"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_below="@+id/ordered_menu_list_list_header"
+	    android:layout_marginTop="16dp"
+	    android:descendantFocusability="blocksDescendants" >
+
+	</ListView>
+
+	<include
+	    android:id="@+id/ordered_menu_list_list_header"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/ordered_menu_list_order_btn"
+	    android:layout_marginTop="16dp"
+	    layout="@layout/ordered_menu_list_header" />
+
+</RelativeLayout>

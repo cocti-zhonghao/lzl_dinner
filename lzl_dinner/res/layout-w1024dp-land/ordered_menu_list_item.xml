@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/ordered_menu_list_item_pic"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="14dp"
+        android:layout_toRightOf="@+id/ordered_menu_list_item_cb" />
+
+    <CheckBox
+        android:id="@+id/ordered_menu_list_item_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/ordered_menu_list_checkbox_background"
+        android:button="@null" />
+
+    <TextView
+        android:id="@+id/ordered_menu_list_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ordered_menu_list_item_cb"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="21dp"
+        android:layout_toRightOf="@+id/ordered_menu_list_item_pic"
+        android:text="川香水煮鱼"
+        android:textColor="#2d2d2d"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/ordered_menu_list_item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="390dp"
+        android:text="￥35.00"
+        android:textColor="#2d2d2d"
+        android:textSize="22sp" />
+
+    <Button
+        android:id="@+id/ordered_menu_list_item_plus_bt"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignTop="@+id/ordered_menu_list_item_cb"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="570dp"
+        android:background="@drawable/ordered_menu_list_minus" />
+
+    <TextView
+        android:id="@+id/ordered_menu_list_item_count"
+        android:layout_width="64dp"
+        android:layout_height="32dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/ordered_menu_list_item_plus_bt"
+        android:background="@drawable/iv_background_line_64x32"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="#2d2d2d"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/ordered_menu_list_item_minus_bt"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/ordered_menu_list_item_count"
+        android:background="@drawable/ordered_menu_list_plus" />
+
+    <TextView
+        android:id="@+id/ordered_menu_list_item_total_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ordered_menu_list_item_price"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="71dp"
+        android:layout_toRightOf="@+id/ordered_menu_list_item_minus_bt"
+        android:text="￥35.00"
+        android:textColor="#fb5240"
+        android:textSize="22sp" />
+
+</RelativeLayout>
